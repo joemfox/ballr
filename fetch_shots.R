@@ -131,8 +131,9 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
     all_shots = raw_shots_data
   }
   else{
-    append(all_shots, raw_shots_data)
+    all_shots <- rbind(all_shots,raw_shots_data)
   }
+    str(raw_shots_data)
 }
 
 
@@ -144,7 +145,7 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
   } else {
     shots = data.frame(
       matrix(
-        unlist(all_shots),
+        unlist(all_shots,recursive=FALSE),
         ncol = length(col_names),
         byrow = TRUE
       )
@@ -153,7 +154,7 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
 
   shots = tbl_df(shots)
   names(shots) = col_names
-  print(paste("shots: ",toString(length(shots))))
+  # print(paste("shots: ",toString(length(shots))))
 
   shots = mutate(shots,
     loc_x = as.numeric(as.character(loc_x)) / 10,
