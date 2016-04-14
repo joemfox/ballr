@@ -7,7 +7,7 @@ circle_points = function(center = c(0, 0), radius = 1, npoints = 360) {
 theme_court = function(base_size = 16) {
   theme_bw(base_size) +
     theme(
-      text = element_text(color = "#f0f0f0"),
+      text = element_text(color = "#000000"),
       plot.background = element_rect(fill = bg_color, color = bg_color),
       panel.background = element_rect(fill = bg_color, color = bg_color),
       panel.grid = element_blank(),
@@ -45,11 +45,11 @@ court_points = data.frame(
   desc = "perimeter"
 )
 
-court_points = rbind(court_points , data.frame(
-  x = c(outer_key_width / 2, outer_key_width / 2, -outer_key_width / 2, -outer_key_width / 2),
-  y = c(0, key_height, key_height, 0),
-  desc = "outer_key"
-))
+# court_points = rbind(court_points , data.frame(
+#   x = c(outer_key_width / 2, outer_key_width / 2, -outer_key_width / 2, -outer_key_width / 2),
+#   y = c(0, key_height, key_height, 0),
+#   desc = "outer_key"
+# ))
 
 court_points = rbind(court_points , data.frame(
   x = c(-backboard_width / 2, backboard_width / 2),
@@ -57,19 +57,19 @@ court_points = rbind(court_points , data.frame(
   desc = "backboard"
 ))
 
-court_points = rbind(court_points , data.frame(
-  x = c(0, 0), y = c(backboard_offset, backboard_offset + neck_length), desc = "neck"
-))
+# court_points = rbind(court_points , data.frame(
+#   x = c(0, 0), y = c(backboard_offset, backboard_offset + neck_length), desc = "neck"
+# ))
 
-foul_circle = circle_points(center = c(0, key_height), radius = inner_key_width / 2)
-foul_circle_top = filter(foul_circle, y > key_height) %>% mutate(desc = "foul_circle_top")
-foul_circle_bottom = filter(foul_circle, y < key_height) %>% mutate(desc = "foul_circle_bottom")
+# foul_circle = circle_points(center = c(0, key_height), radius = inner_key_width / 2)
+# foul_circle_top = filter(foul_circle, y > key_height) %>% mutate(desc = "foul_circle_top")
+# foul_circle_bottom = filter(foul_circle, y < key_height) %>% mutate(desc = "foul_circle_bottom")
 
 hoop = circle_points(center = c(0, hoop_center_y), radius = hoop_radius) %>% mutate(desc = "hoop")
 
-restricted = circle_points(center = c(0, hoop_center_y), radius = 4) %>%
-  filter(y >= hoop_center_y) %>%
-  mutate(desc = "restricted")
+# restricted = circle_points(center = c(0, hoop_center_y), radius = 4) %>%
+#   filter(y >= hoop_center_y) %>%
+#   mutate(desc = "restricted")
 
 three_point_circle = circle_points(center = c(0, hoop_center_y), radius = three_point_radius) %>% filter(y >= three_point_side_height)
 short_three_circle = circle_points(center = c(0, hoop_center_y), radius = short_three_radius) %>% filter(y >= hoop_center_y)
@@ -86,7 +86,7 @@ short_three_line = data.frame(
   desc = "short_three_line"
 )
 
-court_without_three = rbind(court_points , foul_circle_top, foul_circle_bottom, hoop, restricted)
+# court_without_three = rbind(court_points , foul_circle_top, foul_circle_bottom, hoop, restricted)
 
 court_points = rbind(court_without_three, three_point_line)
 court_points = mutate(court_points , dash = (desc == "foul_circle_bottom"))
@@ -97,7 +97,7 @@ short_three_court_points = mutate(short_three_court_points , dash = (desc == "fo
 court = ggplot() +
   geom_path(data = court_points,
             aes(x = x, y = y, group = desc, linetype = dash),
-            color = "#999999") +
+            color = "#ffffff") +
   scale_linetype_manual(values = c("solid", "longdash"), guide = FALSE) +
   coord_fixed(ylim = c(0, 35), xlim = c(-25, 25)) +
   theme_court(base_size = 22)
@@ -105,7 +105,7 @@ court = ggplot() +
 short_three_court = ggplot() +
   geom_path(data = short_three_court_points,
             aes(x = x, y = y, group = desc, linetype = dash),
-            color = "#999999") +
+            color = "#ffffff") +
   scale_linetype_manual(values = c("solid", "longdash"), guide = FALSE) +
   coord_fixed(ylim = c(0, 35), xlim = c(-25, 25)) +
   theme_court(base_size = 22)

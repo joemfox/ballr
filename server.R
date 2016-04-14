@@ -165,15 +165,15 @@ shinyServer(function(input, output, session) {
   #   paste0(unique(shots()$player$team_name), collapse = ", ")
   # })
 
-  output$shot_chart_footer = renderUI({
-    req(shot_chart())
+  # output$shot_chart_footer = renderUI({
+  #   req(shot_chart())
 
-    tags$div(
-      "Source: stats.nba.com",
-      tags$br(),
-      "toddwschneider.com/ballr"
-    )
-  })
+  #   tags$div(
+  #     "Source: stats.nba.com",
+  #     tags$br(),
+  #     "toddwschneider.com/ballr"
+  #   )
+  # })
 
   output$download_link = renderUI({
     req(shot_chart())
@@ -189,7 +189,7 @@ shinyServer(function(input, output, session) {
     tags$a("Download Chart",
            href = "#",
            class = "download-shot-chart",
-           "data-filename" = paste0(fname, ".svg"))
+           "data-filename" = paste0(fname, ".png"))
   })
 
   output$player_photo = renderUI({
