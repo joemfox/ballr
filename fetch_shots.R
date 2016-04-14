@@ -86,7 +86,7 @@ default_shots = fetch_shots_by_player_id_and_season(default_player$person_id, de
 
 fetch_shots_in_range_by_player_id = function(player_id,start,end) {
   # req(player_id,start)
-
+  print(start)
   for(i in start:end){
   season = paste(toString(i), "-", substrRight(toString(i+1),2),sep="")
   print(season)
