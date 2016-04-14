@@ -38,6 +38,7 @@ fetch_shots_by_player_id_and_season = function(player_id, season) {
 
   raw_shots_data = data$resultSets[[1]]$rowSet
   col_names = tolower(as.character(data$resultSets[[1]]$headers))
+  print(paste("shots: ",toString(length(raw_shots_data))))
 
   if (length(raw_shots_data) == 0) {
     shots = data.frame(
@@ -82,7 +83,7 @@ fetch_shots_by_player_id_and_season = function(player_id, season) {
   return(list(player = shots, league_averages = league_averages))
 }
 
-default_shots = fetch_shots_by_player_id_and_season(default_player$person_id, default_season)
+# default_shots = fetch_shots_by_player_id_and_season(default_player$person_id, default_season)
 
 fetch_shots_in_range_by_player_id = function(player_id,start,end) {
   # req(player_id,start)
@@ -152,6 +153,7 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
 
   shots = tbl_df(shots)
   names(shots) = col_names
+  print(paste("shots: ",toString(length(shots))))
 
   shots = mutate(shots,
     loc_x = as.numeric(as.character(loc_x)) / 10,
@@ -178,5 +180,3 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
 
   return(list(player = shots, league_averages = league_averages))
 }
-
-default_shots = fetch_shots_by_player_id_and_season(default_player$person_id, default_season)
