@@ -189,7 +189,7 @@ shinyServer(function(input, output, session) {
     tags$a("Download Chart",
            href = "#",
            class = "download-shot-chart",
-           "data-filename" = paste0(fname, ".png"))
+           "data-filename" = paste0(fname, ".svg"))
   })
 
   output$player_photo = renderUI({
