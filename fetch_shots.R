@@ -133,7 +133,7 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
   else{
     all_shots <- rbind(all_shots,raw_shots_data)
   }
-    str(raw_shots_data)
+    # str(raw_shots_data)
 }
 
 
