@@ -145,7 +145,7 @@ fetch_shots_in_range_by_player_id = function(player_id,start,end) {
   } else {
     shots = data.frame(
       matrix(
-        unlist(all_shots,recursive=FALSE),
+        unlist(all_shots),
         ncol = length(col_names),
         byrow = TRUE
       )
