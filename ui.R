@@ -85,7 +85,13 @@ shinyUI(
                       selectize = FALSE),
 
           selectInput(inputId = "season",
-                      label = "Season",
+                      label = "Start Season",
+                      choices = rev(default_seasons),
+                      selected = default_season,
+                      selectize = FALSE),
+
+          selectInput(inputId = "end_season",
+                      label = "End Season",
                       choices = rev(default_seasons),
                       selected = default_season,
                       selectize = FALSE),

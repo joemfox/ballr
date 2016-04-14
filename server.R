@@ -19,6 +19,11 @@ shinyServer(function(input, output, session) {
     input$season
   })
 
+  end_season = reactive({
+    req(input$end_season)
+    input$end_season
+  })
+
   update_season_input = observe({
     req(current_player(), current_player_seasons())
 
@@ -33,19 +38,25 @@ shinyServer(function(input, output, session) {
                         "season",
                         choices = rev(current_player_seasons()),
                         selected = selected_value)
+
+      updateSelectInput(session,
+                  "end_season",
+                  choices = rev(current_player_seasons()),
+                  selected = selected_value)
     })
   })
 
   shots = reactive({
-    req(current_player(), current_season())
+    req(current_player(), current_season(), end_season())
     req(current_season() %in% current_player_seasons())
+    req(end_season() %in% current_player_seasons())
 
     use_default_shots = current_player()$person_id == default_player$person_id & current_season() == default_season
 
     if (use_default_shots) {
       default_shots
     } else {
-      fetch_shots_by_player_id_and_season(current_player()$person_id, current_season())
+      fetch_shots_in_range_by_player_id_and_season(current_player()$person_id, current_season(),end_season())
     }
   })
 
