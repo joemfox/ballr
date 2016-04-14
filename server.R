@@ -150,26 +150,26 @@ shinyServer(function(input, output, session) {
     }
   })
 
-  output$chart_header_player = renderText({
-    req(current_player())
-    current_player()$name
-  })
+  # output$chart_header_player = renderText({
+  #   req(current_player())
+  #   current_player()$name
+  # })
 
-  output$chart_header_info = renderText({
-    req(current_season(), shots())
-    paste(current_season(), "Regular Season")
-  })
+  # output$chart_header_info = renderText({
+  #   req(current_season(), shots())
+  #   paste(current_season(), "Regular Season")
+  # })
 
-  output$chart_header_team = renderText({
-    req(shots()$player)
-    paste0(unique(shots()$player$team_name), collapse = ", ")
-  })
+  # output$chart_header_team = renderText({
+  #   req(shots()$player)
+  #   paste0(unique(shots()$player$team_name), collapse = ", ")
+  # })
 
   output$shot_chart_footer = renderUI({
     req(shot_chart())
 
     tags$div(
-      "Data via stats.nba.com",
+      "Source: stats.nba.com",
       tags$br(),
       "toddwschneider.com/ballr"
     )
@@ -205,7 +205,7 @@ shinyServer(function(input, output, session) {
     withProgress({
       shot_chart()
     }, message = "Calculating...")
-  }, height = 600, width = 800, bg = bg_color)
+  }, height = 1200, width = 1600, bg = bg_color)
 
   filters_applied = reactive({
     req(filtered_shots())
