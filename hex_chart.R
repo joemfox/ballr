@@ -136,11 +136,13 @@ generate_hex_chart = function(hex_data, use_short_three = FALSE, metric = "bound
   base_court +
     geom_polygon(data = hex_data$hex_data,
                  aes_string(x = "adj_x", y = "adj_y", group = "hexbin_id",
-                            fill = metric),
+                            fill = factor(metric)),
                  size = 0) +
-         scale_fill_gradientn(paste0(fill_label, "   "),
-                              colors = new_colors,
-                              limit = fill_limit,
+         scale_colour_manual(paste0(fill_label, "   "),
+                              # colors = new_colors,
+                              values = new_colors,
+                              # limit = fill_limit,
+                              breaks = c(-.12,-.08,-.04,.04,.011,.12),
                               labels = label_formatter,
                               guide = guide_colorbar(barwidth = 15)) +
          # scale_alpha_continuous(guide = FALSE, range = alpha_range, trans = "sqrt") +
