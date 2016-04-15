@@ -6,7 +6,7 @@ $(function() {
     html2canvas($(".shot-chart-container"), {
       onrendered: function (canvas) {
         var a = document.createElement("a");
-        a.href = canvas.toDataURL({format:"image/png",quality:1}).replace("image/png", "image/octet-stream");
+        a.href = canvas.toDataURL("image/jpeg",1);
         a.download = filename;
         a.click();
       }
