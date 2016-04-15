@@ -66,7 +66,7 @@ calculate_hex_coords = function(shots, binwidths) {
   inner_join(hexbin_coords, hexbin_stats, by = "hexbin_id")
 }
 
-calculate_hexbins_from_shots = function(shots, league_averages, binwidths = c(1, 1), min_radius_factor = 0.6, fg_diff_limits = c(-0.12, 0.12), fg_pct_limits = c(0.2, 0.7), pps_limits = c(0.5, 1.5)) {
+calculate_hexbins_from_shots = function(shots, league_averages, binwidths = c(1, 1), min_radius_factor = 0.6, fg_diff_limits = c(-0.12,0.12), fg_pct_limits = c(0.2, 0.7), pps_limits = c(0.5, 1.5)) {
   if (nrow(shots) == 0) {
     return(list())
   }
@@ -143,6 +143,6 @@ generate_hex_chart = function(hex_data, use_short_three = FALSE, metric = "bound
                               limit = fill_limit,
                               labels = label_formatter,
                               guide = guide_colorbar(barwidth = 15)) +
-         scale_alpha_continuous(guide = FALSE, range = alpha_range, trans = "sqrt") +
+         # scale_alpha_continuous(guide = FALSE, range = alpha_range, trans = "sqrt") +
          theme(legend.text = element_text(size = rel(0.6)))
 }
